@@ -10,8 +10,7 @@ public class Score {
     public Score() {
     }
 
-    public Score(int idScore, int idUser, int idQuest, int score, int nbErr) {
-        this.idScore = idScore;
+    public Score(int idUser, int idQuest, int score, int nbErr) {
         this.idUser = idUser;
         this.idQuest = idQuest;
         this.score = score;

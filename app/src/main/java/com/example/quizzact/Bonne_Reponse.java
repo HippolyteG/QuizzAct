@@ -4,6 +4,10 @@ public class Bonne_Reponse {
     private int idRep;
     private int idQuest;
 
+    public Bonne_Reponse(){
+
+    }
+
     public Bonne_Reponse(int idRep, int idQuest) {
         this.idRep = idRep;
         this.idQuest = idQuest;

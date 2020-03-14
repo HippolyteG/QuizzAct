@@ -1,16 +1,16 @@
 package com.example.quizzact;
 
-public class Reponses {
+public class Reponse {
     private int idRep;
     private int idQuest;
-    private String label;
+    private String libRep;
 
-    public Reponses() {
+    public Reponse() {
     }
 
-    public Reponses(int idQuest, String label) {
+    public Reponse(int idQuest, String libRep) {
         this.idQuest = idQuest;
-        this.label = label;
+        this.libRep = libRep;
     }
 
     public int getIdRep() {
@@ -29,12 +29,12 @@ public class Reponses {
         this.idQuest = idQuest;
     }
 
-    public String getLabel() {
-        return label;
+    public String getLibRep() {
+        return libRep;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
+    public void setLibRep(String libRep) {
+        this.libRep = libRep;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class Reponses {
         return "Reponses{" +
                 "idRep=" + idRep +
                 ", idQuest=" + idQuest +
-                ", label='" + label + '\'' +
+                ", label='" + libRep + '\'' +
                 '}';
     }
 }

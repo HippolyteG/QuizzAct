@@ -1,32 +1,32 @@
 package com.example.quizzact;
 
 public class Question {
-    private int id;
-    private String label;
+    private int idQuest;
+    private String libQuest;
     private int idTheme;
 
     public Question() {
     }
 
-    public Question(String label, int idRep) {
-        this.label = label;
+    public Question(String libQuest, int idRep) {
+        this.libQuest = libQuest;
         this.idTheme = idRep;
     }
 
     public int getId() {
-        return id;
+        return idQuest;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idQuest = id;
     }
 
-    public String getLabel() {
-        return label;
+    public String getLibQuest() {
+        return libQuest;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
+    public void setLibQuest(String libQuest) {
+        this.libQuest = libQuest;
     }
 
     public int getIdRep() {
@@ -40,8 +40,8 @@ public class Question {
     @Override
     public String toString() {
         return "Question{" +
-                "id=" + id +
-                ", label='" + label + '\'' +
+                "id=" + idQuest +
+                ", label='" + libQuest + '\'' +
                 ", idRep=" + idTheme +
                 '}';
     }
