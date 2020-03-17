@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.buttonPlay = (Button) findViewById(R.id.buttonPlay);
+        this.buttonScore = (Button) findViewById(R.id.buttonScore);
         this.buttonSettings = (Button) findViewById(R.id.buttonSettings);
 
 
@@ -89,6 +90,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,ParamsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        this.buttonScore.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,ScoreActivity.class);
                 startActivity(intent);
             }
         });
