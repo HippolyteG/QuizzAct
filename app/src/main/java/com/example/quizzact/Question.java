@@ -29,11 +29,11 @@ public class Question {
         this.libQuest = libQuest;
     }
 
-    public int getIdRep() {
+    public int getIdTheme() {
         return idTheme;
     }
 
-    public void setIdRep(int idRep) {
+    public void setIdTheme(int idRep) {
         this.idTheme = idRep;
     }
 
