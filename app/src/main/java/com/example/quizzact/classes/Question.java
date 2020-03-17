@@ -1,4 +1,4 @@
-package com.example.quizzact;
+package com.example.quizzact.classes;
 
 public class Question {
     private int idQuest;
@@ -8,9 +8,9 @@ public class Question {
     public Question() {
     }
 
-    public Question(String libQuest, int idRep) {
+    public Question(String libQuest, int idTheme) {
         this.libQuest = libQuest;
-        this.idTheme = idRep;
+        this.idTheme = idTheme;
     }
 
     public int getId() {

@@ -1,9 +1,12 @@
-package com.example.quizzact;
+package com.example.quizzact.classesBDD;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.example.quizzact.BaseDeDonnees;
+import com.example.quizzact.classes.Utilisateur;
 
 public class UtilisateurBDD {
     public class LivresBDD {

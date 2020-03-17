@@ -1,4 +1,4 @@
-package com.example.quizzact;
+package com.example.quizzact.classes;
 
 public class Utilisateur {
     private int idUser;

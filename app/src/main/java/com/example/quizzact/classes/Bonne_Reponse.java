@@ -1,16 +1,16 @@
-package com.example.quizzact;
+package com.example.quizzact.classes;
 
-public class Reponse {
+public class Bonne_Reponse {
     private int idRep;
     private int idQuest;
-    private String libRep;
 
-    public Reponse() {
+    public Bonne_Reponse(){
+
     }
 
-    public Reponse(int idQuest, String libRep) {
+    public Bonne_Reponse(int idRep, int idQuest) {
+        this.idRep = idRep;
         this.idQuest = idQuest;
-        this.libRep = libRep;
     }
 
     public int getIdRep() {
@@ -29,20 +29,11 @@ public class Reponse {
         this.idQuest = idQuest;
     }
 
-    public String getLibRep() {
-        return libRep;
-    }
-
-    public void setLibRep(String libRep) {
-        this.libRep = libRep;
-    }
-
     @Override
     public String toString() {
-        return "Reponses{" +
+        return "Bonne_Reponse{" +
                 "idRep=" + idRep +
                 ", idQuest=" + idQuest +
-                ", label='" + libRep + '\'' +
                 '}';
     }
 }
