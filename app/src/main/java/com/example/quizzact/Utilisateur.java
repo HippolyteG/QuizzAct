@@ -16,6 +16,10 @@ public class Utilisateur {
         this.password=password;
     }
 
+    public int getIdUser(){return this.idUser;}
+
+    public void setIdUser(int idUser){this.idUser=idUser;}
+
     public String getPseudo() {
         return pseudo;
     }

@@ -14,6 +14,10 @@ public class Theme {
         this.libTheme=libTheme;
     }
 
+    public int getIdTheme(){return this.idTheme;}
+
+    public void setIdTheme(int idTheme){this.idTheme=idTheme;}
+
     public String getLibTheme(){
         return this.libTheme;
     }
