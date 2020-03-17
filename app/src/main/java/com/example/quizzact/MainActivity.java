@@ -15,22 +15,31 @@ import com.example.quizzact.classesBDD.QuestionBDD;
 import com.example.quizzact.classesBDD.ReponseBDD;
 import com.example.quizzact.classesBDD.ThemeBDD;
 
+
 public class MainActivity extends AppCompatActivity {
 
     Button buttonPlay;
+    Button buttonScore;
+    Button buttonSettings;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.buttonPlay = (Button) findViewById(R.id.buttonPlay);
+        this.buttonSettings = (Button) findViewById(R.id.buttonSettings);
 
 
         ///////        THEME
 
         ThemeBDD themeBDD = new ThemeBDD(this);
 
-        Theme animaux = new Theme("animaux");
+        Theme themeAnimaux = new Theme("Animaux");
+
+        themeBDD.open();
+        themeBDD.insertTheme(themeAnimaux);
+        themeBDD.close();
 
 
         //////         REPONSE
@@ -55,8 +64,9 @@ public class MainActivity extends AppCompatActivity {
 
         Question quest = new Question("Combien de dents ont les chiens",1);
 
-        //questBdd.open();
-        //questBdd.close();
+        questBdd.open();
+        questBdd.insertQuestion(quest);
+        questBdd.close();
 
 
 
@@ -74,5 +84,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        this.buttonSettings.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,ParamsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
+
+
