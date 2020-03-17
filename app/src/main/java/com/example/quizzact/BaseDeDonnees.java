@@ -52,7 +52,6 @@ public class BaseDeDonnees extends SQLiteOpenHelper {
 
     private static final String CREATE_TABLE_QUESTION = "create table " + TABLE_QUESTION + " ("
             + ID_QUESTION +" integer primary key autoincrement,"
-
             + LIB_QUESTION+ " text not null, "
             + ID_THEME +" integer not null references "+ TABLE_THEME +"("+ID_THEME+"));";
 
