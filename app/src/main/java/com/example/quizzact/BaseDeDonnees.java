@@ -101,13 +101,6 @@ public class BaseDeDonnees extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(DELETE_TABLE_SCORE);
-        db.execSQL(DELETE_TABLE_UTILISATEUR);
-        db.execSQL(DELETE_TABLE_BONNE_REPONSE);
-        db.execSQL(DELETE_TABLE_REPONSE);
-        db.execSQL(DELETE_TABLE_QUESTION);
-        db.execSQL(DELETE_TABLE_THEME);
-
         db.execSQL(CREATE_TABLE_THEME);
         db.execSQL(CREATE_TABLE_QUESTION);
         db.execSQL(CREATE_TABLE_REPONSE);

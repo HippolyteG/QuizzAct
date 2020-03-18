@@ -59,6 +59,10 @@ public class QuestionBDD {
 
         return bdd.delete(TABLE_QUESTION, COL_ID_QUEST + " = " +id, null);
     }
+    public int removeQuestionAvecLib(String lib){
+
+        return bdd.delete(TABLE_QUESTION, COL_LIB_QUEST + " LIKE \"" +lib+"\"", null);
+    }
     public Question getQuestionAvecLib(String libQuest){
 
         Cursor c = bdd.query(TABLE_QUESTION, new String[] {COL_ID_QUEST, COL_LIB_QUEST, COL_ID_THEME},
