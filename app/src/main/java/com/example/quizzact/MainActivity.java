@@ -36,42 +36,11 @@ public class MainActivity extends AppCompatActivity {
         this.buttonSettings = (Button) findViewById(R.id.buttonSettings);
 
 
-        ///////        THEME
-
-        ThemeBDD themeBDD = new ThemeBDD(this);
-
-        Theme themeAnimaux = new Theme("Animaux");
-
-        themeBDD.open();
-        themeBDD.insertTheme(themeAnimaux);
-        themeBDD.close();
 
 
-        //////         REPONSE
-
-        ReponseBDD repBdd = new ReponseBDD(this);
-
-        Reponse rep1 = new Reponse (1,"1");
-        Reponse rep2 = new Reponse(1,"2");
-        Reponse rep3 = new Reponse (1,"3");
-        Reponse rep4 = new Reponse (1,"4");
-
-        repBdd.open();
-        repBdd.insertReponse(rep1);
-        repBdd.insertReponse(rep2);
-        repBdd.insertReponse(rep3);
-        repBdd.insertReponse(rep4);
-        repBdd.close();
 
 
-        //////         QUESTION
-        QuestionBDD questBdd = new QuestionBDD(this);
 
-        Question quest = new Question("Combien de dents ont les chiens",1);
-
-        questBdd.open();
-        questBdd.insertQuestion(quest);
-        questBdd.close();
 
         ThemeBDD themeBDD1 = new ThemeBDD(this);
         Theme theme = new Theme("Capitale");
@@ -79,10 +48,13 @@ public class MainActivity extends AppCompatActivity {
         QuestionBDD questionBDD = new QuestionBDD(this);
         //Création d'un question
         Question question = new Question("Quelle est la capitale de la france ?", 0);
+
         //On ouvre la base de données pour écrire dedans
         themeBDD1.open();
         questionBDD.open();
+
         Question myOldQuest = questionBDD.getQuestionAvecLib("Old Question");
+
         //Si aucun question n'est retourné, c'est le cas à la première exécution de l'application
         if(myOldQuest == null){
             //On affiche un message indiquant que le question n'existe pas dans la BDD
@@ -134,20 +106,12 @@ public class MainActivity extends AppCompatActivity {
         //on crée un question que l'on voudra retrouver à la prochaine exécution de l'application
         Question question2 = new Question("Quelle est la capitale de la Berlgique", 0);
         questionBDD.insertQuestion(question2);
-        themeBDD.close();
+
+        themeBDD1.close();
         questionBDD.close();
 
-       /* LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_layout,
-                (ViewGroup) findViewById(R.id.toast_layout_root));
-        ImageView image = (ImageView) layout.findViewById(R.id.image);
-        image.setImageResource(R.drawable.ic_launcher_background);
-        TextView text = (TextView) layout.findViewById(R.id.text);
-        text.setText("Notre toast personnalisé avec une image dedans !");
-        Toast toast = new Toast(getApplicationContext());
-        toast.setView(layout);
-        toast.setDuration(Toast.LENGTH_SHORT);
-        toast.show();*/
+
+
 
 
 

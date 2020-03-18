@@ -8,9 +8,7 @@ public class Question {
     public Question() {
     }
 
-    public Question(String libQuest){
-        this.libQuest = libQuest;
-    }
+
     public Question(String libQuest, int idTheme) {
         this.libQuest = libQuest;
         this.idTheme = idTheme;
