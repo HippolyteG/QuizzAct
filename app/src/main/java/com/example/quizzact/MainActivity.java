@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     Button buttonSettings;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
         this.buttonScore = (Button) findViewById(R.id.buttonScore);
         this.buttonSettings = (Button) findViewById(R.id.buttonSettings);
 
+
+        /*ThemeBDD themeBdd= new ThemeBDD(this);
+        themeBdd.open();
+        Theme theme = themeBdd.getThemeWithID(2);
+        String test = theme.getLibTheme();
+        Toast.makeText(this, test, Toast.LENGTH_LONG).show();*/
 
         this.buttonPlay.setOnClickListener(new View.OnClickListener() {
 
