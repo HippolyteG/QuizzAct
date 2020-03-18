@@ -85,7 +85,12 @@ public class BaseDeDonnees extends SQLiteOpenHelper {
             + SCORE_SCORE+" integer not null ,"
             + NBERR_SCORE+" integer not null);";
 
-
+    private static final String DELETE_TABLE_THEME = "delete from " + TABLE_THEME;
+    private static final String DELETE_TABLE_QUESTION = "delete from " + TABLE_QUESTION;
+    private static final String DELETE_TABLE_REPONSE = "delete from " + TABLE_REPONSE;
+    private static final String DELETE_TABLE_BONNE_REPONSE = "delete from " + TABLE_BONNE_REPONSE;
+    private static final String DELETE_TABLE_UTILISATEUR = "delete from " + TABLE_UTILISATEUR;
+    private static final String DELETE_TABLE_SCORE = "delete from " + TABLE_SCORE;
     /////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////
 
@@ -96,6 +101,13 @@ public class BaseDeDonnees extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL(DELETE_TABLE_SCORE);
+        db.execSQL(DELETE_TABLE_UTILISATEUR);
+        db.execSQL(DELETE_TABLE_BONNE_REPONSE);
+        db.execSQL(DELETE_TABLE_REPONSE);
+        db.execSQL(DELETE_TABLE_QUESTION);
+        db.execSQL(DELETE_TABLE_THEME);
+
         db.execSQL(CREATE_TABLE_THEME);
         db.execSQL(CREATE_TABLE_QUESTION);
         db.execSQL(CREATE_TABLE_REPONSE);
