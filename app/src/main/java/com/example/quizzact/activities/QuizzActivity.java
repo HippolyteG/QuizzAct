@@ -1,9 +1,10 @@
-package com.example.quizzact;
+package com.example.quizzact.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.quizzact.R;
 import com.example.quizzact.classes.Question;
 import com.example.quizzact.classesBDD.QuestionBDD;
 

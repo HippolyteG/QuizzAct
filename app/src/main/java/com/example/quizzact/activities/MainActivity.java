@@ -1,4 +1,8 @@
-package com.example.quizzact;
+package com.example.quizzact.activities;
+
+import com.example.quizzact.HomeWatcher;
+import com.example.quizzact.audio.MusicService;
+import com.example.quizzact.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,23 +13,9 @@ import android.content.ServiceConnection;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.os.PowerManager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.quizzact.classes.Question;
-import com.example.quizzact.classes.Reponse;
-import com.example.quizzact.classes.Theme;
-import com.example.quizzact.classesBDD.QuestionBDD;
-import com.example.quizzact.classesBDD.ReponseBDD;
-import com.example.quizzact.classesBDD.ThemeBDD;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -35,9 +25,10 @@ public class MainActivity extends AppCompatActivity {
     Button buttonScore;
     Button buttonSettings;
     Button buttonSon;
-
-    MediaPlayer mediaPlayer;
+    MediaPlayer sounds;
     HomeWatcher homeWatcher;
+
+    static String test="ON";
 
 
 
@@ -48,10 +39,13 @@ public class MainActivity extends AppCompatActivity {
         this.buttonPlay = findViewById(R.id.buttonPlay);
         this.buttonScore = findViewById(R.id.buttonScore);
         this.buttonSettings = findViewById(R.id.buttonSettings);
-        this.buttonSon = findViewById(R.id.buttonSon);
+        this.buttonSon = findViewById(R.id.buttonMusic);
+        this.sounds =MediaPlayer.create(this,R.raw.sound);
 
-        /*this.mediaPlayer = MediaPlayer.create(this,R.raw.musique);
-        mediaPlayer.start();*/
+        Intent intent2 = getIntent();
+        if(intent2.getStringExtra("buttonSounds")!=null){
+            test=intent2.getStringExtra("buttonSounds");
+        }
 
         //BIND Music Service
         doBindService();
@@ -62,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(intent.getAction()=="android.intent.action.MAIN"){
             startService(music);
-        }else if(intent.getStringExtra("buttonSon")=="ON"){
+        }else if(intent.getStringExtra("buttonMusic")=="ON"){
             startService(music);
         }
 
@@ -86,17 +80,16 @@ public class MainActivity extends AppCompatActivity {
         homeWatcher.startWatch();
 
 
-        /*ThemeBDD themeBdd= new ThemeBDD(this);
-        themeBdd.open();
-        Theme theme = themeBdd.getThemeWithID(2);
-        String test = theme.getLibTheme();
-        Toast.makeText(this, test, Toast.LENGTH_LONG).show();*/
+
 
         this.buttonPlay.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,QuizzActivity.class);
+                System.out.println(test);
+                if(test.equals("ON"))
+                sounds.start();
+                Intent intent = new Intent(MainActivity.this, QuizzActivity.class);
                 startActivity(intent);
             }
         });
@@ -105,11 +98,22 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,ParamsActivity.class);
-                Intent intent2 = getIntent();
 
-                if(intent2.getStringExtra("buttonSon")!=null){
-                    intent.putExtra("buttonSon",intent2.getStringExtra("buttonSon"));
+
+                Intent intent = new Intent(MainActivity.this, ParamsActivity.class);
+                Intent intent2 = getIntent();
+                if(intent2.getStringExtra("buttonSounds")!=null){
+
+                    if(test.equals("ON")){
+                        sounds.start();
+                    }
+                    intent.putExtra("buttonSounds",intent2.getStringExtra("buttonSounds"));
+                }else{
+                    sounds.start();
+                }
+
+                if(intent2.getStringExtra("buttonMusic")!=null){
+                    intent.putExtra("buttonMusic",intent2.getStringExtra("buttonMusic"));
                 }
 
                 startActivity(intent);
@@ -120,7 +124,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,ScoreActivity.class);
+                System.out.println(test);
+                if(test.equals("ON"))
+                sounds.start();
+                Intent intent = new Intent(MainActivity.this, ScoreActivity.class);
                 startActivity(intent);
             }
         });
@@ -129,15 +136,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /*@Override
-    protected void onRestart() {
-        super.onRestart();
-        this.mediaPlayer.start();
-    }*/
+
 
 
     private boolean mIsBound = false;
     private MusicService mServ;
+
     private ServiceConnection Scon =new ServiceConnection(){
 
         public void onServiceConnected(ComponentName name, IBinder

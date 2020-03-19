@@ -1,6 +1,5 @@
-package com.example.quizzact;
+package com.example.quizzact.activities;
 
-import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -8,25 +7,26 @@ import android.content.ServiceConnection;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.os.PowerManager;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.MainThread;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.quizzact.HomeWatcher;
+import com.example.quizzact.R;
+import com.example.quizzact.audio.MusicService;
 
 public class ParamsActivity extends AppCompatActivity /*implements Parcelable */{
 
-    Button buttonSon;
+    Button buttonMusic;
+    Button buttonSounds;
     MediaPlayer mediaplayer;
     HomeWatcher homeWatcher;
     private boolean mIsBound = false;
     private MusicService mServ;
-    public static final String KEY_BUNDLE_BUTTON_SON = "buttonSon";
+    public static final String KEY_BUNDLE_BUTTON_MUSIC = "buttonMusic";
+    public static final String KEY_BUNDLE_BUTTON_SOUNDS = "buttonSounds";
     public String test;
 
     private ServiceConnection Scon =new ServiceConnection(){
@@ -45,52 +45,67 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_params );
-        this.buttonSon = (Button) findViewById(R.id.buttonSon);
+        this.buttonMusic = (Button) findViewById(R.id.buttonMusic);
+        this.buttonSounds = findViewById(R.id.buttonSounds);
+        this.mediaplayer=MediaPlayer.create(this,R.raw.sound);
+
         doBindService();
         final Intent music = new Intent();
         music.setClass(this,MusicService.class);
 
 
-        if (savedInstanceState != null) {
-            buttonSon.setText(savedInstanceState.getString(test));
-        }
 
 
         Intent intent=getIntent();
-       if(intent.getStringExtra("buttonSon")!=null){
+       if(intent.getStringExtra("buttonMusic")!=null){
 
-            buttonSon.setText(intent.getStringExtra("buttonSon"));
-            System.out.println(""+intent.getStringExtra("buttonSon"));
+            buttonMusic.setText(intent.getStringExtra("buttonMusic"));
+
+        }
+        if(intent.getStringExtra("buttonSounds")!=null){
+
+            buttonSounds.setText(intent.getStringExtra("buttonSounds"));
+
         }
 
 
 
 
-        this.buttonSon.setOnClickListener(new View.OnClickListener() {
-
-            @SuppressLint("ResourceAsColor")
+        this.buttonMusic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(String.valueOf(buttonSon.getText()).equals("ON")){
-                    buttonSon.setText("OFF");
+                if(String.valueOf(buttonMusic.getText()).equals("ON")){
+                    buttonMusic.setText("OFF");
                     mServ.pauseMusic();
                 }else {
-                    buttonSon.setText("ON");
+                    buttonMusic.setText("ON");
                     mServ.resumeMusic();
                 }
 
             }
         });
 
+       this.buttonSounds.setOnClickListener(new View.OnClickListener(){
+
+           @Override
+           public void onClick(View v) {
+               if(String.valueOf(buttonSounds.getText()).equals("ON")){
+                   buttonSounds.setText("OFF");
+               }else {
+                   mediaplayer.start();
+                   buttonSounds.setText("ON");
+               }
+           }
+       });
+
     }
 
     @Override
     public void onBackPressed(){
-        Intent intent = new Intent(ParamsActivity.this,MainActivity.class);
-        intent.putExtra("buttonSon",buttonSon.getText());
+        Intent intent = new Intent(ParamsActivity.this, MainActivity.class);
+        intent.putExtra("buttonMusic", buttonMusic.getText());
+        intent.putExtra("buttonSounds",buttonSounds.getText());
         startActivity(intent);
-        Bundle bundle = intent.getExtras();
-        onSaveInstanceState(bundle);
         super.onBackPressed();
 
     }
@@ -116,11 +131,9 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
     protected void onSaveInstanceState(Bundle savedInstanceState) {
 
         super.onSaveInstanceState(savedInstanceState);
-        System.out.println("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJj" +
-                "JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ" +
-                "JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ "+String.valueOf(buttonSon.getText()));
-        savedInstanceState.putString(KEY_BUNDLE_BUTTON_SON, String.valueOf(buttonSon.getText()));
 
+        savedInstanceState.putString(KEY_BUNDLE_BUTTON_MUSIC, String.valueOf(buttonMusic.getText()));
+        savedInstanceState.putString(KEY_BUNDLE_BUTTON_SOUNDS,String.valueOf(buttonSounds.getText()));
         onRestoreInstanceState(savedInstanceState);
 
 
@@ -130,7 +143,8 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
 
         super.onRestoreInstanceState(savedInstanceState);
-        buttonSon.setText(savedInstanceState.getString(KEY_BUNDLE_BUTTON_SON));
+        buttonMusic.setText(savedInstanceState.getString(KEY_BUNDLE_BUTTON_MUSIC));
+        buttonSounds.setText(savedInstanceState.getString(KEY_BUNDLE_BUTTON_SOUNDS));
 
 
     }
@@ -138,7 +152,7 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
     protected void onResume() {
         super.onResume();
 
-        if ((mServ != null)&&(buttonSon.getText()=="ON")) {
+        if ((mServ != null)&&(buttonMusic.getText()=="ON")) {
             mServ.resumeMusic();
         }
     }

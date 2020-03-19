@@ -1,4 +1,4 @@
-package com.example.quizzact;
+package com.example.quizzact.activities;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.quizzact.R;
 
 public class ScoreActivity extends AppCompatActivity {
     @Override
