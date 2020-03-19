@@ -42,24 +42,29 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_params );
         this.buttonSon = (Button) findViewById(R.id.buttonSon);
+        doBindService();
+        final Intent music = new Intent();
+        music.setClass(this,MusicService.class);
 
-        if(mServ.isPlaying()){
-            System.out.println("SALUT");
-            buttonSon.setText("ON");
-        }else{
-            System.out.println("TAMERE");
-            buttonSon.setText("OFF");
+
+        if(mServ!=null){
+            if(mServ.isPlaying()){
+                System.out.println("SALUT");
+                buttonSon.setText("ON");
+            }else{
+                System.out.println("TAMERE");
+                buttonSon.setText("OFF");
+            }
         }
+
+
         /*this.buttonSon.setText("ON");*/
 
 
         /*this.mediaplayer = getIntent().getParcelableExtra("salut");
         mediaplayer.start();
 */
-        doBindService();
-        final Intent music = new Intent();
-        music.setClass(this,MusicService.class);
-        startService(music);
+
 
 
 
