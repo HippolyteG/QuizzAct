@@ -24,6 +24,8 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
     HomeWatcher homeWatcher;
     private boolean mIsBound = false;
     private MusicService mServ;
+    public static final String BUNDLE_BUTTON_SON_ON = "ON";
+    public static final String BUNDLE_BUTTON_SON_OFF = "ON";
 
     private ServiceConnection Scon =new ServiceConnection(){
 
@@ -46,24 +48,11 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
         final Intent music = new Intent();
         music.setClass(this,MusicService.class);
 
-
-        if(mServ!=null){
-            if(mServ.isPlaying()){
-                System.out.println("SALUT");
-                buttonSon.setText("ON");
-            }else{
-                System.out.println("TAMERE");
-                buttonSon.setText("OFF");
-            }
+        if (savedInstanceState == null) {
+            buttonSon.setText("ON");
+        } else {
+            buttonSon.setText("OFF");
         }
-
-
-        /*this.buttonSon.setText("ON");*/
-
-
-        /*this.mediaplayer = getIntent().getParcelableExtra("salut");
-        mediaplayer.start();
-*/
 
 
 
@@ -134,6 +123,21 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
         }
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+
+        savedInstanceState.putString(BUNDLE_BUTTON_SON_ON, String.valueOf(buttonSon.getText()));
+
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        buttonSon.setText("OFF");
+
+
+    }
     @Override
     protected void onResume() {
         super.onResume();

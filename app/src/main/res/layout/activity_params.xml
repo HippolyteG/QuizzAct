@@ -27,6 +27,7 @@
         android:layout_width="116dp"
         android:layout_height="68dp"
         android:text="ON"
+        android:freezesText="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.779"
