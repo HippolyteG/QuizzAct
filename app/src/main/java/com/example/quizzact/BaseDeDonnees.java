@@ -85,12 +85,6 @@ public class BaseDeDonnees extends SQLiteOpenHelper {
             + SCORE_SCORE+" integer not null ,"
             + NBERR_SCORE+" integer not null);";
 
-    private static final String DELETE_TABLE_THEME = "delete from " + TABLE_THEME;
-    private static final String DELETE_TABLE_QUESTION = "delete from " + TABLE_QUESTION;
-    private static final String DELETE_TABLE_REPONSE = "delete from " + TABLE_REPONSE;
-    private static final String DELETE_TABLE_BONNE_REPONSE = "delete from " + TABLE_BONNE_REPONSE;
-    private static final String DELETE_TABLE_UTILISATEUR = "delete from " + TABLE_UTILISATEUR;
-    private static final String DELETE_TABLE_SCORE = "delete from " + TABLE_SCORE;
     /////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////
 

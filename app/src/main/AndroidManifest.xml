@@ -9,6 +9,10 @@
         android:roundIcon="@mipmap/logo_app"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        
+       <service android:name=".MusicService"
+                android:enabled="true"/>
+        
         <activity android:name=".MainActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -68,6 +68,14 @@ public class ReponseBDD {
                 COL_LIB_REP + " LIKE \"" + libRep +"\"", null, null, null, null);
         return cursorToReponse(c);
     }
+
+    public Reponse getReponseAvecID(int id){
+        //On récupère dans un Cursor les valeurs correspondant à une reponse contenu dans la BDD
+        //(ici on sélectionne la reponse grâce à son titre)
+        Cursor c = bdd.query(TABLE_REPONSE, new String[] {COL_ID_REP, COL_ID_QUEST, COL_LIB_REP},
+                COL_ID_REP + " LIKE \"" + id +"\"", null, null, null, null);
+        return cursorToReponse(c);
+    }
     //Cette méthode permet de convertir un cursor en une question
     private Reponse cursorToReponse(Cursor c){
         //si aucun élément n'a été retourné dans la requête, on renvoie null
