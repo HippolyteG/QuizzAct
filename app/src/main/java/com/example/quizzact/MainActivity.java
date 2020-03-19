@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         music.setClass(this, MusicService.class);
         Intent intent = getIntent();
         System.out.println(intent);
-        System.out.println("SALUT");
+
         if(intent.getAction()=="android.intent.action.MAIN"){
             startService(music);
         }else if(intent.getStringExtra("buttonSon")=="ON"){
@@ -106,6 +106,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,ParamsActivity.class);
+                Intent intent2 = getIntent();
+
+                if(intent2.getStringExtra("buttonSon")!=null){
+                    intent.putExtra("buttonSon",intent2.getStringExtra("buttonSon"));
+                }
+
                 startActivity(intent);
             }
         });

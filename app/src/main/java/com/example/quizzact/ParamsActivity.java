@@ -1,5 +1,6 @@
 package com.example.quizzact;
 
+import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.os.Parcelable;
 import android.os.PowerManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.MainThread;
@@ -24,8 +26,8 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
     HomeWatcher homeWatcher;
     private boolean mIsBound = false;
     private MusicService mServ;
-    public static final String BUNDLE_BUTTON_SON_ON = "ON";
-    public static final String BUNDLE_BUTTON_SON_OFF = "ON";
+    public static final String KEY_BUNDLE_BUTTON_SON = "buttonSon";
+    public String test;
 
     private ServiceConnection Scon =new ServiceConnection(){
 
@@ -48,42 +50,28 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
         final Intent music = new Intent();
         music.setClass(this,MusicService.class);
 
-        if (savedInstanceState == null) {
-            buttonSon.setText("ON");
-        } else {
-            buttonSon.setText("OFF");
+
+        if (savedInstanceState != null) {
+            buttonSon.setText(savedInstanceState.getString(test));
+        }
+
+
+        Intent intent=getIntent();
+       if(intent.getStringExtra("buttonSon")!=null){
+
+            buttonSon.setText(intent.getStringExtra("buttonSon"));
+            System.out.println(""+intent.getStringExtra("buttonSon"));
         }
 
 
 
 
-
-
-
-
-        homeWatcher = new HomeWatcher(this);
-        homeWatcher.setOnHomePressedListener(new HomeWatcher.OnHomePressedListener() {
-            @Override
-            public void onHomePressed() {
-                if (mServ != null) {
-                    mServ.pauseMusic();
-                }
-            }
-            @Override
-            public void onHomeLongPressed() {
-                if (mServ != null) {
-                    mServ.pauseMusic();
-                }
-            }
-        });
-        homeWatcher.startWatch();
-
-
         this.buttonSon.setOnClickListener(new View.OnClickListener() {
 
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
-                if(buttonSon.getText()=="ON"){
+                if(String.valueOf(buttonSon.getText()).equals("ON")){
                     buttonSon.setText("OFF");
                     mServ.pauseMusic();
                 }else {
@@ -101,10 +89,11 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
         Intent intent = new Intent(ParamsActivity.this,MainActivity.class);
         intent.putExtra("buttonSon",buttonSon.getText());
         startActivity(intent);
+        Bundle bundle = intent.getExtras();
+        onSaveInstanceState(bundle);
         super.onBackPressed();
 
     }
-
 
 
 
@@ -126,15 +115,22 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
 
-        savedInstanceState.putString(BUNDLE_BUTTON_SON_ON, String.valueOf(buttonSon.getText()));
-
         super.onSaveInstanceState(savedInstanceState);
+        System.out.println("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJj" +
+                "JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ" +
+                "JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ "+String.valueOf(buttonSon.getText()));
+        savedInstanceState.putString(KEY_BUNDLE_BUTTON_SON, String.valueOf(buttonSon.getText()));
+
+        onRestoreInstanceState(savedInstanceState);
+
+
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
+
         super.onRestoreInstanceState(savedInstanceState);
-        buttonSon.setText("OFF");
+        buttonSon.setText(savedInstanceState.getString(KEY_BUNDLE_BUTTON_SON));
 
 
     }
@@ -142,7 +138,7 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
     protected void onResume() {
         super.onResume();
 
-        if (mServ != null) {
+        if ((mServ != null)&&(buttonSon.getText()=="ON")) {
             mServ.resumeMusic();
         }
     }

@@ -27,13 +27,12 @@
         android:layout_width="116dp"
         android:layout_height="68dp"
         android:text="ON"
-        android:freezesText="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.779"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.274"/>
+        app:layout_constraintVertical_bias="0.274" />
 
 
     <TextView
