@@ -21,23 +21,21 @@ public class ThemeBDD {
 
     private SQLiteDatabase bdd;
     private BaseDeDonnees baseDeDonnees;
-
     public ThemeBDD(Context context){
         //On crée la BDD et sa table
         baseDeDonnees = new BaseDeDonnees(context, NOM_BDD, null, VERSION_BDD);
     }
-
     public void open(){
         //on ouvre la BDD en écriture
         bdd = baseDeDonnees.getWritableDatabase();
     }
-
     public void close(){
         //on ferme l'accès à la BDD
         bdd.close();
     }
-
-    public SQLiteDatabase getBDD(){ return bdd;    }
+    public SQLiteDatabase getBDD(){
+        return bdd;
+    }
     public long insertTheme(Theme theme){
         //Création d'un ContentValues (fonctionne comme une HashMap)
         ContentValues values = new ContentValues();
@@ -69,10 +67,9 @@ public class ThemeBDD {
     public Theme getThemeWithID(int id){
         //On récupère dans un Cursor les valeurs correspondant à un livre contenu dans la BDD
         Cursor c = bdd.query(TABLE_THEME, new String[] {ID_THEME, LIB_THEME},
-                ID_THEME + " LIKE \"" + id +"\"", null, null, null, null);
+                ID_THEME + " = " + id, null, null, null, null);
         return cursorToLivre(c);
     }
-
     //Cette méthode permet de convertir un cursor en un livre
     private Theme cursorToLivre(Cursor c){
         //si aucun élément n'a été retourné dans la requête, on renvoie null
@@ -84,7 +81,7 @@ public class ThemeBDD {
         Theme theme = new Theme();
         //on lui affecte toutes les infos grâce aux infos contenues dans le Cursor
         theme.setIdTheme(c.getInt(NUM_IDTHEME));
-        theme.setLibTheme(c.getString(NUM_IDTHEME));
+        theme.setLibTheme(c.getString(NUM_LIBTHEME));
 
         //On ferme le cursor
         c.close();
@@ -92,3 +89,4 @@ public class ThemeBDD {
         return theme;
     }
 }
+
