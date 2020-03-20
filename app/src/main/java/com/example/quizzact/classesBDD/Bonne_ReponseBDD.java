@@ -60,13 +60,13 @@ public class Bonne_ReponseBDD {
         return bdd.delete(TABLE_BONNE_REPONSE, COL_ID_REP + " = " +idRep + COL_ID_QUEST + " = " + idQuest, null);
     }
 
-    public Bonne_Reponse getBonneReponseAvecIDQuestion(String idQuest){
+    public Bonne_Reponse getBonneReponseAvecIDQuestion(int idQuest){
         //On récupère dans un Cursor la bonne réponse contenu dans la BDD
         //(ici on sélectionne la bonne_réponse grâce à l'id de la question)
         Cursor c = bdd.query(TABLE_BONNE_REPONSE, new String[] {COL_ID_REP, COL_ID_QUEST},
 
                 //Il y aura peut etre une erreur ici, car on compare un String avec un int
-                COL_ID_QUEST + " = \"" + idQuest +"\"", null, null, null, null);
+                COL_ID_QUEST + " LIKE \"" + idQuest +"\"", null, null, null, null);
         return cursorToBonneReponse(c);
     }
     //Cette méthode permet de convertir un cursor en un livre
