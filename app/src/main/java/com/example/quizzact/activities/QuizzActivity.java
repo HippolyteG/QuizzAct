@@ -1,6 +1,7 @@
 package com.example.quizzact.activities;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -40,11 +41,12 @@ public class QuizzActivity extends Activity {
 
         QuestionBDD questionBDD = new QuestionBDD(this);
         ReponseBDD reponseBDD = new ReponseBDD(this);
-        Bonne_ReponseBDD bonne_reponseBDD = new Bonne_ReponseBDD(this);
+        Bonne_ReponseBDD bonne_reponseBDD = new Bonne_ReponseBDD(QuizzActivity.this);
 
         bonne_reponseBDD.open();
         reponseBDD.open();
         questionBDD.open();
+
 
         Question question;
         Reponse[] rep = new Reponse[4];
@@ -59,7 +61,7 @@ public class QuizzActivity extends Activity {
             tableau[i] = nombreAleatoire;
 
 
-            System.out.println("LE NOMBRE ALEATOIRE EST "+nombreAleatoire);
+
             question=questionBDD.getQuestionAvecID(nombreAleatoire);
             bonne_reponse=bonne_reponseBDD.getBonneReponseAvecIDQuestion(nombreAleatoire);
 
@@ -73,11 +75,82 @@ public class QuizzActivity extends Activity {
                 reponse2.setText(rep[1].getLibRep());
                 reponse3.setText(rep[2].getLibRep());
                 reponse4.setText(rep[3].getLibRep());
+
             }
+
         }
+        final Reponse rep1 = reponseBDD.getReponseAvecLibRep(reponse1.getText().toString());
+        final Reponse rep2 = reponseBDD.getReponseAvecLibRep(reponse2.getText().toString());
+        final Reponse rep3 = reponseBDD.getReponseAvecLibRep(reponse3.getText().toString());
+        final Reponse rep4 = reponseBDD.getReponseAvecLibRep(reponse4.getText().toString());
+
         reponse1.setOnClickListener(new View.OnClickListener(){
+
             @Override
             public void onClick(View v){
+                Bonne_ReponseBDD bonne_reponseBDD = new Bonne_ReponseBDD(QuizzActivity.this);
+                bonne_reponseBDD.open();
+                QuestionBDD qbdd= new QuestionBDD(QuizzActivity.this);
+                qbdd.open();
+                Question q = qbdd.getQuestionAvecLib(tvQuestion.getText().toString());
+                if(bonne_reponseBDD.getBonneReponseAvecIDQuestion(q.getId()).getIdRep()==rep1.getIdRep()){
+                    reponse1.setBackgroundColor(Color.GREEN);
+                    reponse2.setBackgroundColor(Color.RED);
+                    reponse3.setBackgroundColor(Color.RED);
+                    reponse4.setBackgroundColor(Color.RED);
+                }
+
+            }
+        });
+        reponse2.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Bonne_ReponseBDD bonne_reponseBDD = new Bonne_ReponseBDD(QuizzActivity.this);
+                bonne_reponseBDD.open();
+                QuestionBDD qbdd = new QuestionBDD(QuizzActivity.this);
+                qbdd.open();
+                Question q = qbdd.getQuestionAvecLib(tvQuestion.getText().toString());
+
+                if (bonne_reponseBDD.getBonneReponseAvecIDQuestion(q.getId()).getIdRep() == rep2.getIdRep()) {
+                    reponse1.setBackgroundColor(Color.RED);
+                    reponse2.setBackgroundColor(Color.GREEN);
+                    reponse3.setBackgroundColor(Color.RED);
+                    reponse4.setBackgroundColor(Color.RED);
+                }
+            }
+
+        });
+        reponse3.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Bonne_ReponseBDD bonne_reponseBDD = new Bonne_ReponseBDD(QuizzActivity.this);
+                bonne_reponseBDD.open();
+                QuestionBDD qbdd= new QuestionBDD(QuizzActivity.this);
+                qbdd.open();
+                Question q = qbdd.getQuestionAvecLib(tvQuestion.getText().toString());
+                if(bonne_reponseBDD.getBonneReponseAvecIDQuestion(q.getId()).getIdRep()==rep3.getIdRep()){
+                    reponse1.setBackgroundColor(Color.RED);
+                    reponse2.setBackgroundColor(Color.RED);
+                    reponse3.setBackgroundColor(Color.GREEN);
+                    reponse4.setBackgroundColor(Color.RED);
+                }
+
+            }
+        });
+        reponse4.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Bonne_ReponseBDD bonne_reponseBDD = new Bonne_ReponseBDD(QuizzActivity.this);
+                bonne_reponseBDD.open();
+                QuestionBDD qbdd= new QuestionBDD(QuizzActivity.this);
+                qbdd.open();
+                Question q = qbdd.getQuestionAvecLib(tvQuestion.getText().toString());
+                if(bonne_reponseBDD.getBonneReponseAvecIDQuestion(q.getId()).getIdRep()==rep4.getIdRep()){
+                    reponse1.setBackgroundColor(Color.RED);
+                    reponse2.setBackgroundColor(Color.RED);
+                    reponse3.setBackgroundColor(Color.RED);
+                    reponse4.setBackgroundColor(Color.GREEN);
+                }
 
             }
         });
