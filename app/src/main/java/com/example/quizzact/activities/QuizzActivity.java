@@ -108,6 +108,10 @@ public class QuizzActivity extends Activity {
                     reponse1.setBackgroundColor(Color.GRAY);
                     reponse4.setBackgroundColor(Color.GREEN);
                 }
+                reponse1.setEnabled(false);
+                reponse2.setEnabled(false);
+                reponse3.setEnabled(false);
+                reponse4.setEnabled(false);
             }
         });
         reponse2.setOnClickListener(new View.OnClickListener(){
@@ -134,6 +138,10 @@ public class QuizzActivity extends Activity {
                     reponse2.setBackgroundColor(Color.GRAY);
                     reponse4.setBackgroundColor(Color.GREEN);
                 }
+                reponse1.setEnabled(false);
+                reponse2.setEnabled(false);
+                reponse3.setEnabled(false);
+                reponse4.setEnabled(false);
             }
 
         });
@@ -160,6 +168,10 @@ public class QuizzActivity extends Activity {
                     reponse3.setBackgroundColor(Color.GRAY);
                     reponse4.setBackgroundColor(Color.GREEN);
                 }
+                reponse1.setEnabled(false);
+                reponse2.setEnabled(false);
+                reponse3.setEnabled(false);
+                reponse4.setEnabled(false);
 
             }
         });
@@ -186,9 +198,17 @@ public class QuizzActivity extends Activity {
                 if(bonne_reponseBDD.getBonneReponseAvecIDQuestion(q.getId()).getIdRep()==rep4.getIdRep()){
                     reponse4.setBackgroundColor(Color.GREEN);
                 }
-
+                reponse1.setEnabled(false);
+                reponse2.setEnabled(false);
+                reponse3.setEnabled(false);
+                reponse4.setEnabled(false);
             }
         });
+
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
 
     }
 }
