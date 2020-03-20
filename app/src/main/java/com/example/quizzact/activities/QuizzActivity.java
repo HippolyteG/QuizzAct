@@ -11,9 +11,11 @@ import com.example.quizzact.R;
 import com.example.quizzact.classes.Bonne_Reponse;
 import com.example.quizzact.classes.Question;
 import com.example.quizzact.classes.Reponse;
+import com.example.quizzact.classes.Theme;
 import com.example.quizzact.classesBDD.Bonne_ReponseBDD;
 import com.example.quizzact.classesBDD.QuestionBDD;
 import com.example.quizzact.classesBDD.ReponseBDD;
+import com.example.quizzact.classesBDD.ThemeBDD;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,6 +24,7 @@ public class QuizzActivity extends Activity {
 
     TextView tvNumQuestion;
     TextView tvQuestion;
+    TextView tvTheme;
     Button reponse1;
     Button reponse2;
     Button reponse3;
@@ -33,21 +36,24 @@ public class QuizzActivity extends Activity {
         setContentView(R.layout.activity_quizz);
 
         tvNumQuestion = findViewById(R.id.numQuestion);
+        tvTheme = findViewById(R.id.theme);
         tvQuestion = findViewById(R.id.question);
         reponse1 = findViewById(R.id.reponse1);
         reponse2 = findViewById(R.id.reponse2);
         reponse3 = findViewById(R.id.reponse3);
         reponse4 = findViewById(R.id.reponse4);
 
+        ThemeBDD themeBDD = new ThemeBDD(this);
         QuestionBDD questionBDD = new QuestionBDD(this);
         ReponseBDD reponseBDD = new ReponseBDD(this);
         Bonne_ReponseBDD bonne_reponseBDD = new Bonne_ReponseBDD(QuizzActivity.this);
 
+        themeBDD.open();
         bonne_reponseBDD.open();
         reponseBDD.open();
         questionBDD.open();
 
-
+        Theme theme;
         Question question;
         Reponse[] rep = new Reponse[4];
         Bonne_Reponse bonne_reponse = new Bonne_Reponse();
@@ -64,8 +70,10 @@ public class QuizzActivity extends Activity {
 
             question=questionBDD.getQuestionAvecID(nombreAleatoire);
             bonne_reponse=bonne_reponseBDD.getBonneReponseAvecIDQuestion(nombreAleatoire);
+            theme= themeBDD.getThemeWithID(question.getIdTheme());
 
             if(question!=null){
+                tvTheme.setText("Thème : " + theme.getLibTheme());
                 tvQuestion.setText(question.getLibQuest());
 
                 rep = reponseBDD.getReponsesLieAQuestion(questionBDD.getQuestionAvecID(nombreAleatoire).getId());
