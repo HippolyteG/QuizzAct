@@ -95,11 +95,19 @@ public class QuizzActivity extends Activity {
                 Question q = qbdd.getQuestionAvecLib(tvQuestion.getText().toString());
                 if(bonne_reponseBDD.getBonneReponseAvecIDQuestion(q.getId()).getIdRep()==rep1.getIdRep()){
                     reponse1.setBackgroundColor(Color.GREEN);
-                    reponse2.setBackgroundColor(Color.RED);
-                    reponse3.setBackgroundColor(Color.RED);
-                    reponse4.setBackgroundColor(Color.RED);
                 }
-
+                if(bonne_reponseBDD.getBonneReponseAvecIDQuestion(q.getId()).getIdRep()==rep2.getIdRep()){
+                    reponse1.setBackgroundColor(Color.GRAY);
+                    reponse2.setBackgroundColor(Color.GREEN);
+                }
+                if(bonne_reponseBDD.getBonneReponseAvecIDQuestion(q.getId()).getIdRep()==rep3.getIdRep()){
+                    reponse1.setBackgroundColor(Color.GRAY);
+                    reponse3.setBackgroundColor(Color.GREEN);
+                }
+                if(bonne_reponseBDD.getBonneReponseAvecIDQuestion(q.getId()).getIdRep()==rep4.getIdRep()){
+                    reponse1.setBackgroundColor(Color.GRAY);
+                    reponse4.setBackgroundColor(Color.GREEN);
+                }
             }
         });
         reponse2.setOnClickListener(new View.OnClickListener(){
@@ -111,11 +119,20 @@ public class QuizzActivity extends Activity {
                 qbdd.open();
                 Question q = qbdd.getQuestionAvecLib(tvQuestion.getText().toString());
 
-                if (bonne_reponseBDD.getBonneReponseAvecIDQuestion(q.getId()).getIdRep() == rep2.getIdRep()) {
-                    reponse1.setBackgroundColor(Color.RED);
+                if(bonne_reponseBDD.getBonneReponseAvecIDQuestion(q.getId()).getIdRep()==rep1.getIdRep()){
+                    reponse1.setBackgroundColor(Color.GREEN);
+                    reponse2.setBackgroundColor(Color.GRAY);
+                }
+                if(bonne_reponseBDD.getBonneReponseAvecIDQuestion(q.getId()).getIdRep()==rep2.getIdRep()){
                     reponse2.setBackgroundColor(Color.GREEN);
-                    reponse3.setBackgroundColor(Color.RED);
-                    reponse4.setBackgroundColor(Color.RED);
+                }
+                if(bonne_reponseBDD.getBonneReponseAvecIDQuestion(q.getId()).getIdRep()==rep3.getIdRep()){
+                    reponse2.setBackgroundColor(Color.GRAY);
+                    reponse3.setBackgroundColor(Color.GREEN);
+                }
+                if(bonne_reponseBDD.getBonneReponseAvecIDQuestion(q.getId()).getIdRep()==rep4.getIdRep()){
+                    reponse2.setBackgroundColor(Color.GRAY);
+                    reponse4.setBackgroundColor(Color.GREEN);
                 }
             }
 
@@ -128,11 +145,20 @@ public class QuizzActivity extends Activity {
                 QuestionBDD qbdd= new QuestionBDD(QuizzActivity.this);
                 qbdd.open();
                 Question q = qbdd.getQuestionAvecLib(tvQuestion.getText().toString());
+                if(bonne_reponseBDD.getBonneReponseAvecIDQuestion(q.getId()).getIdRep()==rep1.getIdRep()){
+                    reponse1.setBackgroundColor(Color.GREEN);
+                    reponse3.setBackgroundColor(Color.GRAY);
+                }
+                if(bonne_reponseBDD.getBonneReponseAvecIDQuestion(q.getId()).getIdRep()==rep2.getIdRep()){
+                    reponse2.setBackgroundColor(Color.GREEN);
+                    reponse3.setBackgroundColor(Color.GRAY);
+                }
                 if(bonne_reponseBDD.getBonneReponseAvecIDQuestion(q.getId()).getIdRep()==rep3.getIdRep()){
-                    reponse1.setBackgroundColor(Color.RED);
-                    reponse2.setBackgroundColor(Color.RED);
                     reponse3.setBackgroundColor(Color.GREEN);
-                    reponse4.setBackgroundColor(Color.RED);
+                }
+                if(bonne_reponseBDD.getBonneReponseAvecIDQuestion(q.getId()).getIdRep()==rep4.getIdRep()){
+                    reponse3.setBackgroundColor(Color.GRAY);
+                    reponse4.setBackgroundColor(Color.GREEN);
                 }
 
             }
@@ -145,10 +171,19 @@ public class QuizzActivity extends Activity {
                 QuestionBDD qbdd= new QuestionBDD(QuizzActivity.this);
                 qbdd.open();
                 Question q = qbdd.getQuestionAvecLib(tvQuestion.getText().toString());
+                if(bonne_reponseBDD.getBonneReponseAvecIDQuestion(q.getId()).getIdRep()==rep1.getIdRep()){
+                    reponse1.setBackgroundColor(Color.GREEN);
+                    reponse4.setBackgroundColor(Color.GRAY);
+                }
+                if(bonne_reponseBDD.getBonneReponseAvecIDQuestion(q.getId()).getIdRep()==rep2.getIdRep()){
+                    reponse2.setBackgroundColor(Color.GREEN);
+                    reponse4.setBackgroundColor(Color.GRAY);
+                }
+                if(bonne_reponseBDD.getBonneReponseAvecIDQuestion(q.getId()).getIdRep()==rep3.getIdRep()){
+                    reponse3.setBackgroundColor(Color.GREEN);
+                    reponse4.setBackgroundColor(Color.GRAY);
+                }
                 if(bonne_reponseBDD.getBonneReponseAvecIDQuestion(q.getId()).getIdRep()==rep4.getIdRep()){
-                    reponse1.setBackgroundColor(Color.RED);
-                    reponse2.setBackgroundColor(Color.RED);
-                    reponse3.setBackgroundColor(Color.RED);
                     reponse4.setBackgroundColor(Color.GREEN);
                 }
 
