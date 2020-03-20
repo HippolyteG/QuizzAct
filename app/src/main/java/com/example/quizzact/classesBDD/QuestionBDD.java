@@ -73,9 +73,10 @@ public class QuestionBDD {
     public Question getQuestionAvecID(int id){
 
         Cursor c = bdd.query(TABLE_QUESTION, new String[] {COL_ID_QUEST, COL_LIB_QUEST, COL_ID_THEME},
-                COL_ID_QUEST + " LIKE \"" + id +"\"", null, null, null, null);
+                COL_ID_QUEST + " = \"" + id +"\"", null, null, null, null);
         return cursorToQuestion(c);
     }
+
 
     public int countLignes(){
         int nbLignes=0;

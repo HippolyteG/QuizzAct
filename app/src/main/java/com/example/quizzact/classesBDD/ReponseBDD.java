@@ -3,6 +3,7 @@ package com.example.quizzact.classesBDD;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.quizzact.BaseDeDonnees;
@@ -76,7 +77,7 @@ public class ReponseBDD {
                 COL_ID_REP + " LIKE \"" + id +"\"", null, null, null, null);
         return cursorToReponse(c);
     }
-    //Cette méthode permet de convertir un cursor en une question
+
     private Reponse cursorToReponse(Cursor c){
         //si aucun élément n'a été retourné dans la requête, on renvoie null
         if (c.getCount() == 0)
@@ -94,4 +95,47 @@ public class ReponseBDD {
         //On retourne la réponse
         return reponse;
     }
+
+    public Reponse[] getReponsesLieAQuestion(int data){
+        Reponse[] rep= new Reponse[4];
+        String res = "select idRep from reponse where idQuest="+ data;
+        Cursor c = bdd.query(TABLE_REPONSE, new String[] {COL_ID_REP, COL_ID_QUEST, COL_LIB_REP},
+                COL_ID_QUEST + " LIKE \"" + data +"\"",null, null, null, null);
+        if(c.getCount()==0){
+            return null;
+        }
+        int i=0;
+        c.moveToFirst();
+        while(!c.isLast()){
+            Reponse reponse = new Reponse();
+
+            reponse.setIdRep(c.getInt(NUM_COL_ID_REP));
+            reponse.setIdQuest(c.getInt(NUM_COL_ID_QUEST));
+            reponse.setLibRep(c.getString(NUM_COL_LIB_REP));
+
+            rep[i]=reponse;
+            c.moveToNext();
+            i++;
+        }
+        Reponse reponse = new Reponse();
+
+        reponse.setIdRep(c.getInt(NUM_COL_ID_REP));
+        reponse.setIdQuest(c.getInt(NUM_COL_ID_QUEST));
+        reponse.setLibRep(c.getString(NUM_COL_LIB_REP));
+
+        rep[i]=reponse;
+        c.moveToNext();
+        c.close();
+        return rep;
+    }
+
+    public int countLignes(){
+        int nbLignes=0;
+        nbLignes=(int) DatabaseUtils.queryNumEntries(bdd,TABLE_REPONSE);
+        return nbLignes;
+    }
+
+
+
+
 }
