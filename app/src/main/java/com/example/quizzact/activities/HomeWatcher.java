@@ -1,4 +1,4 @@
-package com.example.quizzact;
+package com.example.quizzact.activities;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

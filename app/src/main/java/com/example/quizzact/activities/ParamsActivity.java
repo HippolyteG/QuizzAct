@@ -13,7 +13,6 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.quizzact.HomeWatcher;
 import com.example.quizzact.R;
 import com.example.quizzact.audio.MusicService;
 
@@ -54,6 +53,24 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
         music.setClass(this,MusicService.class);
 
 
+
+        //Start HomeWatcher
+        homeWatcher = new HomeWatcher(this);
+        homeWatcher.setOnHomePressedListener(new HomeWatcher.OnHomePressedListener() {
+            @Override
+            public void onHomePressed() {
+                if (mServ != null) {
+                    mServ.pauseMusic();
+                }
+            }
+            @Override
+            public void onHomeLongPressed() {
+                if (mServ != null) {
+                    mServ.pauseMusic();
+                }
+            }
+        });
+        homeWatcher.startWatch();
 
 
         Intent intent=getIntent();
@@ -135,8 +152,6 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
         savedInstanceState.putString(KEY_BUNDLE_BUTTON_MUSIC, String.valueOf(buttonMusic.getText()));
         savedInstanceState.putString(KEY_BUNDLE_BUTTON_SOUNDS,String.valueOf(buttonSounds.getText()));
         onRestoreInstanceState(savedInstanceState);
-
-
     }
 
     @Override
@@ -145,8 +160,6 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
         super.onRestoreInstanceState(savedInstanceState);
         buttonMusic.setText(savedInstanceState.getString(KEY_BUNDLE_BUTTON_MUSIC));
         buttonSounds.setText(savedInstanceState.getString(KEY_BUNDLE_BUTTON_SOUNDS));
-
-
     }
     @Override
     protected void onResume() {

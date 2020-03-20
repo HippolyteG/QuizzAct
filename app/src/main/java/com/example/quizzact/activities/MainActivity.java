@@ -1,8 +1,7 @@
 package com.example.quizzact.activities;
 
-import com.example.quizzact.HomeWatcher;
-import com.example.quizzact.audio.MusicService;
 import com.example.quizzact.R;
+import com.example.quizzact.audio.MusicService;
 
 import androidx.appcompat.app.AppCompatActivity;
 
