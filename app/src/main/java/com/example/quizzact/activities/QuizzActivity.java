@@ -14,5 +14,15 @@ public class QuizzActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quizz);
 
+        QuestionBDD questionBDD = new QuestionBDD(this);
+        questionBDD.open();
+        Question question;
+        for(int i=0;i<5;i++){
+            int nombreAleatoire = 1 + (int)(Math.random() * ((1 - questionBDD.countLignes()) + 1));
+            question=questionBDD.getQuestionAvecID(nombreAleatoire);
+
+        }
+
+
     }
 }

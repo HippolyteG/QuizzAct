@@ -3,6 +3,7 @@ package com.example.quizzact.classesBDD;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.quizzact.BaseDeDonnees;
@@ -68,6 +69,18 @@ public class QuestionBDD {
         Cursor c = bdd.query(TABLE_QUESTION, new String[] {COL_ID_QUEST, COL_LIB_QUEST, COL_ID_THEME},
                 COL_LIB_QUEST + " LIKE \"" + libQuest +"\"", null, null, null, null);
         return cursorToQuestion(c);
+    }
+    public Question getQuestionAvecID(int id){
+
+        Cursor c = bdd.query(TABLE_QUESTION, new String[] {COL_ID_QUEST, COL_LIB_QUEST, COL_ID_THEME},
+                COL_ID_QUEST + " LIKE \"" + id +"\"", null, null, null, null);
+        return cursorToQuestion(c);
+    }
+
+    public int countLignes(){
+        int nbLignes=0;
+        nbLignes=(int) DatabaseUtils.queryNumEntries(bdd,TABLE_QUESTION);
+        return nbLignes;
     }
 
     private Question cursorToQuestion(Cursor c){

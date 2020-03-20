@@ -13,7 +13,7 @@
        <service android:name=".audio.MusicService"
                 android:enabled="true"/>
         
-        <activity android:name=".activities.MainActivity" android:screenOrientation="portrait">
+        <activity android:name=".activities.MainActivity" android:screenOrientation="fullSensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

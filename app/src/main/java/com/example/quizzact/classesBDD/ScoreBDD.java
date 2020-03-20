@@ -3,6 +3,7 @@ package com.example.quizzact.classesBDD;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.quizzact.BaseDeDonnees;
@@ -71,12 +72,30 @@ public class ScoreBDD {
         //Suppression d'un livre de la BDD grâce à l'ID
         return bdd.delete(TABLE_SCORE, ID_SCORE + " = " +id, null);
     }
+
+
     public Score getScoreWithScore(int score){
         //On récupère dans un Cursor les valeurs correspondant à un livre contenu dans la BDD
         Cursor c = bdd.query(TABLE_SCORE, new String[] {ID_SCORE, ID_UTILISATEUR, ID_QUESTION,SCORE_SCORE,NBERR_SCORE},
                 SCORE_SCORE + " LIKE \"" + score +"\"", null, null, null, null);
         return cursorToScore(c);
     }
+
+    public Score getScoreWithID(int id){
+        //On récupère dans un Cursor les valeurs correspondant à un livre contenu dans la BDD
+        Cursor c = bdd.query(TABLE_SCORE, new String[] {ID_SCORE, ID_UTILISATEUR, ID_QUESTION,SCORE_SCORE,NBERR_SCORE},
+                ID_SCORE + " LIKE \"" + id +"\"", null, null, null, null);
+        return cursorToScore(c);
+    }
+
+    public int countLignes(){
+        int nbLignes=0;
+        nbLignes=(int) DatabaseUtils.queryNumEntries(bdd,TABLE_SCORE);
+        return nbLignes;
+    }
+
+
+
     //Cette méthode permet de convertir un cursor en un livre
     private Score cursorToScore(Cursor c){
         //si aucun élément n'a été retourné dans la requête, on renvoie null
