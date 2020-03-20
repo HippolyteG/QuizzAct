@@ -214,9 +214,4 @@ public class QuizzActivity extends Activity {
         });
 
     }
-    @Override
-    public void onPause() {
-        super.onPause();
-
-    }
 }
