@@ -80,7 +80,23 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
         }
 
 
-
+        //Start HomeWatcher
+        homeWatcher = new HomeWatcher(this);
+        homeWatcher.setOnHomePressedListener(new HomeWatcher.OnHomePressedListener() {
+            @Override
+            public void onHomePressed() {
+                if (mServ != null) {
+                    mServ.pauseMusic();
+                }
+            }
+            @Override
+            public void onHomeLongPressed() {
+                if (mServ != null) {
+                    mServ.pauseMusic();
+                }
+            }
+        });
+        homeWatcher.startWatch();
 
         this.buttonMusic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,7 +192,7 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
     protected void onResume() {
         super.onResume();
 
-        if ((mServ != null)&&(buttonMusic.getText()=="ON")) {
+        if ((mServ != null)&&(buttonMusic.getText().toString().equals("ON"))) {
             mServ.resumeMusic();
         }
     }

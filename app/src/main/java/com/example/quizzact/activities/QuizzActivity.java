@@ -80,7 +80,9 @@ public class QuizzActivity extends Activity {
         Bonne_Reponse bonne_reponse = new Bonne_Reponse();
 
 
-
+        doBindService();
+        final Intent music = new Intent();
+        music.setClass(this,MusicService.class);
 
         if(getIntent().getStringExtra("buttonSounds")!=null){
             if(getIntent().getStringExtra("buttonSounds").equals("ON")){
@@ -94,6 +96,8 @@ public class QuizzActivity extends Activity {
 
 
 
+
+
         Intent intent = getIntent();
         numQuestion=intent.getIntExtra("numQuestion",1);
 
@@ -102,12 +106,16 @@ public class QuizzActivity extends Activity {
         }
         score=intent.getIntExtra("score",0);
 
-        if(backPressed==true){
-                System.out.println("SAOT");
-                Intent intent2 = new Intent(QuizzActivity.this,MainActivity.class);
-                finish();
-                startActivity(intent2);
+        if(getIntent().getBooleanExtra("backPressed",false)){
+            System.out.println("SAOT");
+            Intent intent2 = new Intent(QuizzActivity.this,MainActivity.class);
+
+            finish();
+            overridePendingTransition(0, 0);
+            startActivity(intent2);
         }
+
+
 
         if(numQuestion!=6) {
 
@@ -210,6 +218,11 @@ public class QuizzActivity extends Activity {
                             intent.putExtra("numQuestion", numQuestion);
                             intent.putExtra("score",score);
                             intent.putExtra("buttonSounds",soundsOn);
+                            System.out.println("SALUT  :  "+backPressed);
+                            intent.putExtra("backPressed",backPressed);
+                            if(getIntent().getStringExtra("buttonMusic")!=null){
+                                intent.putExtra("buttonMusic",getIntent().getStringExtra("buttonMusic"));
+                            }
                             finish();
                             overridePendingTransition(0, 0);
                             startActivity(intent);
@@ -264,7 +277,11 @@ public class QuizzActivity extends Activity {
                             intent.putExtra("listeQuestions", listeQuestions);
                             intent.putExtra("numQuestion", numQuestion);
                             intent.putExtra("score",score);
+                            intent.putExtra("backPressed",backPressed);
                             intent.putExtra("buttonSounds",soundsOn);
+                            if(getIntent().getStringExtra("buttonMusic")!=null){
+                                intent.putExtra("buttonMusic",getIntent().getStringExtra("buttonMusic"));
+                            }
                             finish();
                             overridePendingTransition(0, 0);
                             startActivity(intent);
@@ -319,6 +336,10 @@ public class QuizzActivity extends Activity {
                             intent.putExtra("numQuestion", numQuestion);
                             intent.putExtra("score",score);
                             intent.putExtra("buttonSounds",soundsOn);
+                            intent.putExtra("backPressed",backPressed);
+                            if(getIntent().getStringExtra("buttonMusic")!=null){
+                                intent.putExtra("buttonMusic",getIntent().getStringExtra("buttonMusic"));
+                            }
 
                             finish();
                             overridePendingTransition(0, 0);
@@ -376,6 +397,9 @@ public class QuizzActivity extends Activity {
                             intent.putExtra("score",score);
                             intent.putExtra("buttonSounds",soundsOn);
                             intent.putExtra("backPressed",backPressed);
+                            if(getIntent().getStringExtra("buttonMusic")!=null){
+                                intent.putExtra("buttonMusic",getIntent().getStringExtra("buttonMusic"));
+                            }
                             finish();
                             overridePendingTransition(0, 0);
                             startActivity(intent);

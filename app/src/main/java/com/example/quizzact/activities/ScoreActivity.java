@@ -78,6 +78,7 @@ public class ScoreActivity extends AppCompatActivity {
         tv2.setGravity(Gravity.CENTER);
         tv2.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
         tv2.setBackground(getDrawable(R.drawable.table_cell));
+        tv2.setPadding(0,0,50,0);
         tv2.setTextColor(ContextCompat.getColor(this, R.color.white));
 
 
@@ -111,6 +112,7 @@ public class ScoreActivity extends AppCompatActivity {
                 tv2.setTextSize(20);
                 tv2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 tv2.setTextColor(ContextCompat.getColor(this, R.color.white));
+                tv2.setPadding(0,0,30,0);
                 tv2.setBackground(getDrawable(R.drawable.table_cell));
 
 

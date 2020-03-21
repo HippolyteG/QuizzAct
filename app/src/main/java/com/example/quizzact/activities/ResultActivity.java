@@ -36,4 +36,7 @@ public class ResultActivity extends AppCompatActivity /*implements Parcelable */
             }
         }, 1500L);
     }
+
+
+
 }
