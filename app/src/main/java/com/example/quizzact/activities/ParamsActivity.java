@@ -15,13 +15,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quizzact.R;
 import com.example.quizzact.audio.MusicService;
+import com.example.quizzact.classesBDD.ScoreBDD;
 
 public class ParamsActivity extends AppCompatActivity /*implements Parcelable */{
 
     Button buttonMusic;
     Button buttonSounds;
+    Button buttonCache;
     MediaPlayer mediaplayer;
     HomeWatcher homeWatcher;
+    ScoreBDD scoreBDD = new ScoreBDD(this);
     private boolean mIsBound = false;
     private MusicService mServ;
     public static final String KEY_BUNDLE_BUTTON_MUSIC = "buttonMusic";
@@ -46,6 +49,7 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
         setContentView(R.layout.activity_params );
         this.buttonMusic = (Button) findViewById(R.id.buttonMusic);
         this.buttonSounds = findViewById(R.id.buttonSounds);
+        this.buttonCache = findViewById(R.id.buttonCache);
         this.mediaplayer=MediaPlayer.create(this,R.raw.sound);
 
         doBindService();
@@ -66,6 +70,13 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
 
             buttonSounds.setText(intent.getStringExtra("buttonSounds"));
 
+        }
+
+        scoreBDD.open();
+        if(scoreBDD.countLignes()!=0){
+            buttonCache.setVisibility(View.VISIBLE);
+        }else{
+            buttonCache.setVisibility(View.INVISIBLE);
         }
 
 
@@ -98,7 +109,24 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
            }
        });
 
+
+        this.buttonCache.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                for(int i=1;i<=scoreBDD.countLignes()+1;i++){
+                    scoreBDD.removeScoreWithID(i);
+                }
+                buttonCache.setVisibility(View.INVISIBLE);
+            }
+
+        });
+
+
+
     }
+
+
 
     @Override
     public void onBackPressed(){

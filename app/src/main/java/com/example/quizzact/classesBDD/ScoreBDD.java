@@ -47,7 +47,7 @@ public class ScoreBDD {
     public long insertScore(Score score){
 
         ContentValues values = new ContentValues();
-
+        values.put(ID_SCORE, score.getIdScore());
         values.put(SCORE_SCORE, score.getScore());
         values.put(DATE_SCORE, score.getDate());
 
@@ -57,6 +57,7 @@ public class ScoreBDD {
         //La mise à jour d'un livre
         //on précise quel livre on doit mettre à jour grâce à l'ID
         ContentValues values = new ContentValues();
+        values.put(ID_SCORE, score.getIdScore());
         values.put(SCORE_SCORE, score.getScore());
         values.put(DATE_SCORE, score.getDate());
         return bdd.update(TABLE_SCORE, values, ID_SCORE + " = " +id, null);

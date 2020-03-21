@@ -23,7 +23,7 @@ public class ResultActivity extends AppCompatActivity /*implements Parcelable */
         tvScore=findViewById(R.id.tvScore);
 
         score=getIntent().getIntExtra("score",0);
-        tvScore.setText((String.valueOf(score)));
+        tvScore.setText((String.valueOf(score*20))+"%");
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable()

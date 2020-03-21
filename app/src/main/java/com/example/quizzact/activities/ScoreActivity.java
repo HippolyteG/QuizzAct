@@ -22,6 +22,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.quizzact.R;
 import com.example.quizzact.audio.MusicService;
@@ -70,14 +71,14 @@ public class ScoreActivity extends AppCompatActivity {
         tv1.setGravity(Gravity.CENTER);
         tv1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         tv1.setBackground(getDrawable(R.drawable.table_cell));
-        tv1.setTextColor(R.color.white);
+        tv1.setTextColor(ContextCompat.getColor(this, R.color.white));
 
         tv2.setText("SCORE");
         tv2.setTextSize(25);
         tv2.setGravity(Gravity.CENTER);
         tv2.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
         tv2.setBackground(getDrawable(R.drawable.table_cell));
-        tv2.setTextColor(R.color.white);
+        tv2.setTextColor(ContextCompat.getColor(this, R.color.white));
 
 
         row.addView(tv1);
@@ -101,7 +102,7 @@ public class ScoreActivity extends AppCompatActivity {
                 tv1.setGravity(Gravity.RIGHT); // centrage dans la cellule
                 tv1.setTextSize(20);
                 tv1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                tv1.setTextColor(R.color.white);
+                tv1.setTextColor(ContextCompat.getColor(this, R.color.white));
                 tv1.setBackground(getDrawable(R.drawable.table_cell));
 
 
@@ -109,7 +110,7 @@ public class ScoreActivity extends AppCompatActivity {
                 tv2.setGravity(Gravity.RIGHT); // centrage dans la cellule
                 tv2.setTextSize(20);
                 tv2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                tv2.setTextColor(R.color.white);
+                tv2.setTextColor(ContextCompat.getColor(this, R.color.white));
                 tv2.setBackground(getDrawable(R.drawable.table_cell));
 
 

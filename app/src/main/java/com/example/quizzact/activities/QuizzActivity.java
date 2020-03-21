@@ -48,6 +48,7 @@ public class QuizzActivity extends Activity {
     ArrayList<Integer> listeQuestions = new ArrayList<Integer>();
     MediaPlayer sound;
     String soundsOn;
+    boolean backPressed=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,10 +102,14 @@ public class QuizzActivity extends Activity {
         }
         score=intent.getIntExtra("score",0);
 
-
+        if(backPressed==true){
+                System.out.println("SAOT");
+                Intent intent2 = new Intent(QuizzActivity.this,MainActivity.class);
+                finish();
+                startActivity(intent2);
+        }
 
         if(numQuestion!=6) {
-            System.out.println("Voici le score : "+score);
 
             int nombreAleatoire = 1 + (int) (Math.random() * ((questionBDD.countLignes() - 1) + 1));
             while (listeQuestions.contains(nombreAleatoire)) {
@@ -112,7 +117,7 @@ public class QuizzActivity extends Activity {
             }
             listeQuestions.add(nombreAleatoire);
 
-            tvNumQuestion.setText("Question "+(numQuestion)+"/5");
+            tvNumQuestion.setText("Question "+ numQuestion +"/5");
 
 
             question = questionBDD.getQuestionAvecID(nombreAleatoire);
@@ -138,7 +143,8 @@ public class QuizzActivity extends Activity {
             String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
             ScoreBDD scoreBDD = new ScoreBDD(this);
             scoreBDD.open();
-            Score scoreObject = new Score(score,currentDate);
+
+            Score scoreObject = new Score(scoreBDD.countLignes()+1,score,currentDate);
             scoreBDD.insertScore(scoreObject);
 
 
@@ -313,11 +319,13 @@ public class QuizzActivity extends Activity {
                             intent.putExtra("numQuestion", numQuestion);
                             intent.putExtra("score",score);
                             intent.putExtra("buttonSounds",soundsOn);
+
                             finish();
                             overridePendingTransition(0, 0);
                             startActivity(intent);
                         }
                     }, 1500L);
+
 
                 }
             });
@@ -367,6 +375,7 @@ public class QuizzActivity extends Activity {
                             intent.putExtra("numQuestion", numQuestion);
                             intent.putExtra("score",score);
                             intent.putExtra("buttonSounds",soundsOn);
+                            intent.putExtra("backPressed",backPressed);
                             finish();
                             overridePendingTransition(0, 0);
                             startActivity(intent);
@@ -397,6 +406,7 @@ public class QuizzActivity extends Activity {
         Intent intent = new Intent(QuizzActivity.this,MainActivity.class);
         finish();
         startActivity(intent);
+        backPressed=true;
         super.onBackPressed();
     }
 

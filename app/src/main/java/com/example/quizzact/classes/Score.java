@@ -8,7 +8,8 @@ public class Score {
     public Score() {
     }
 
-    public Score(int score,String date) {
+    public Score(int idScore,int score,String date) {
+        this.idScore=idScore;
         this.score = score;
         this.date=date;
     }

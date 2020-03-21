@@ -68,7 +68,7 @@ public class BaseDeDonnees extends SQLiteOpenHelper {
 
 
     private static final String CREATE_TABLE_SCORE = "create table " + TABLE_SCORE + " ("
-            + ID_SCORE +" integer primary key autoincrement,"
+            + ID_SCORE +" integer primary key,"
             + SCORE_SCORE+" integer not null,"
             + DATE_SCORE+" text not null);";
 
