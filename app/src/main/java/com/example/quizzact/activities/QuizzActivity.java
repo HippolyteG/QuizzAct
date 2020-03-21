@@ -139,7 +139,7 @@ public class QuizzActivity extends Activity {
 
                 rep = reponseBDD.getReponsesLieAQuestion(questionBDD.getQuestionAvecID(nombreAleatoire).getId());
 
-                Collections.shuffle(Arrays.asList(rep));
+                //Collections.shuffle(Arrays.asList(rep));
                 reponse1.setText(rep[0].getLibRep());
                 reponse2.setText(rep[1].getLibRep());
                 reponse3.setText(rep[2].getLibRep());
