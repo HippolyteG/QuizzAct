@@ -5,6 +5,7 @@ import com.example.quizzact.audio.MusicService;
 import com.example.quizzact.classes.Bonne_Reponse;
 import com.example.quizzact.classes.Question;
 import com.example.quizzact.classes.Reponse;
+import com.example.quizzact.classes.Score;
 import com.example.quizzact.classes.Theme;
 import com.example.quizzact.classesBDD.Bonne_ReponseBDD;
 import com.example.quizzact.classesBDD.QuestionBDD;
@@ -58,16 +59,21 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        //BASE DE DONNES
+        /*//BASE DE DONNES
         QuestionBDD questionBDD = new QuestionBDD(this);
         ReponseBDD reponseBDD = new ReponseBDD(this);
         Bonne_ReponseBDD bonne_reponseBDD = new Bonne_ReponseBDD(this);
         ThemeBDD themeBDD = new ThemeBDD(this);
+        ScoreBDD scoreBDD = new ScoreBDD(this);
 
         questionBDD.open();
         reponseBDD.open();
         bonne_reponseBDD.open();
         themeBDD.open();
+        scoreBDD.open();
+
+        //SCORES
+        scoreBDD.insertScore(new Score(1,5,"date"));
 
         //THEMES
         themeBDD.insertTheme(new Theme("Capitales"));
@@ -269,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
         bonne_reponseBDD.insertBonneReponse(new Bonne_Reponse(109,28));
         bonne_reponseBDD.insertBonneReponse(new Bonne_Reponse(113,29));
         bonne_reponseBDD.insertBonneReponse(new Bonne_Reponse(117,30));
-        bonne_reponseBDD.insertBonneReponse(new Bonne_Reponse(121,31));
+        bonne_reponseBDD.insertBonneReponse(new Bonne_Reponse(121,31));*/
 
 
 
