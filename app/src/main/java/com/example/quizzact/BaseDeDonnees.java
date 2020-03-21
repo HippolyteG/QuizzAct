@@ -27,18 +27,13 @@ public class BaseDeDonnees extends SQLiteOpenHelper {
     //BONNE REPONSE
     private static final String TABLE_BONNE_REPONSE = "BONNE_REPONSE";
 
-    //UTILISATEUR
-    private static final String TABLE_UTILISATEUR = "UTILISATEUR";
-    private static final String ID_UTILISATEUR = "idUser";
-    private static final String PSEUDO_UTILISATEUR = "pseudo";
-    private static final String MAIL_UTILISATEUR = "mail";
-    private static final String PASSWORD_UTILISATEUR = "pwd";
+
 
     //SCORE
     private static final String TABLE_SCORE = "SCORE";
     private static final String ID_SCORE = "idScore";
     private static final String SCORE_SCORE = "score";
-    private static final String NBERR_SCORE = "nbErr";
+    private static final String DATE_SCORE="date";
 
 
     /////////////////////////////////////////////////////////////////
@@ -71,19 +66,11 @@ public class BaseDeDonnees extends SQLiteOpenHelper {
 
 
 
-    private static final String CREATE_TABLE_UTILISATEUR = "create table " + TABLE_UTILISATEUR + " ("
-            + ID_UTILISATEUR +" integer primary key autoincrement,"
-            + PSEUDO_UTILISATEUR+" text not null ,"
-            + MAIL_UTILISATEUR+ "text not null ,"
-            + PASSWORD_UTILISATEUR + " text not null);";
-
 
     private static final String CREATE_TABLE_SCORE = "create table " + TABLE_SCORE + " ("
             + ID_SCORE +" integer primary key autoincrement,"
-            + ID_UTILISATEUR+" integer not null references "+TABLE_UTILISATEUR+"("+ID_UTILISATEUR+"),"
-            + ID_QUESTION+" integer not null references "+TABLE_QUESTION+"("+ID_QUESTION+"),"
-            + SCORE_SCORE+" integer not null ,"
-            + NBERR_SCORE+" integer not null);";
+            + SCORE_SCORE+" integer not null,"
+            + DATE_SCORE+" text not null);";
 
     /////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////
@@ -99,7 +86,6 @@ public class BaseDeDonnees extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_QUESTION);
         db.execSQL(CREATE_TABLE_REPONSE);
         db.execSQL(CREATE_TABLE_BONNE_REPONSE);
-        db.execSQL(CREATE_TABLE_UTILISATEUR);
         db.execSQL(CREATE_TABLE_SCORE);
     }
 
@@ -109,7 +95,6 @@ public class BaseDeDonnees extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE " + TABLE_QUESTION + ";");
         db.execSQL("DROP TABLE " + TABLE_REPONSE + ";");
         db.execSQL("DROP TABLE " + TABLE_BONNE_REPONSE + ";");
-        db.execSQL("DROP TABLE " + TABLE_UTILISATEUR + ";");
         db.execSQL("DROP TABLE " + TABLE_SCORE + ";");
         onCreate(db);
     }

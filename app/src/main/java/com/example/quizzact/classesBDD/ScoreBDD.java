@@ -7,6 +7,7 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.quizzact.BaseDeDonnees;
+import com.example.quizzact.classes.Question;
 import com.example.quizzact.classes.Score;
 
 public class ScoreBDD {
@@ -17,17 +18,13 @@ public class ScoreBDD {
     private static final String ID_SCORE = "idScore";
     private static final int NUM_IDSCORE = 0;
 
-    private static final String ID_UTILISATEUR = "idUser";
-    private static final int NUM_IDUSER = 1;
-
-    private static final String ID_QUESTION = "idQuest";
-    private static final int NUM_IDQUEST = 2;
 
     private static final String SCORE_SCORE = "score";
-    private static final int NUM_SCORE = 3;
+    private static final int NUM_SCORE = 1;
 
-    private static final String NBERR_SCORE = "nbErr";
-    private static final int NUM_NBERR = 4;
+    private static final String DATE_SCORE = "date";
+    private static final int NUM_DATE = 2;
+
 
 
     private SQLiteDatabase bdd;
@@ -48,24 +45,20 @@ public class ScoreBDD {
         return bdd;
     }
     public long insertScore(Score score){
-        //Création d'un ContentValues (fonctionne comme une HashMap)
+
         ContentValues values = new ContentValues();
-        //on lui ajoute une valeur associée à une clé
-        values.put(ID_UTILISATEUR, score.getIdUser());
-        values.put(ID_QUESTION, score.getIdQuest());
+
         values.put(SCORE_SCORE, score.getScore());
-        values.put(NBERR_SCORE, score.getNbErr());
-        //on insère l'objet dans la BDD via le ContentValues
+        values.put(DATE_SCORE, score.getDate());
+
         return bdd.insert(TABLE_SCORE, null, values);
     }
     public int updateScore(int id, Score score){
         //La mise à jour d'un livre
         //on précise quel livre on doit mettre à jour grâce à l'ID
         ContentValues values = new ContentValues();
-        values.put(ID_UTILISATEUR, score.getIdUser());
-        values.put(ID_QUESTION, score.getIdQuest());
         values.put(SCORE_SCORE, score.getScore());
-        values.put(NBERR_SCORE, score.getNbErr());
+        values.put(DATE_SCORE, score.getDate());
         return bdd.update(TABLE_SCORE, values, ID_SCORE + " = " +id, null);
     }
     public int removeScoreWithID(int id){
@@ -76,14 +69,14 @@ public class ScoreBDD {
 
     public Score getScoreWithScore(int score){
         //On récupère dans un Cursor les valeurs correspondant à un livre contenu dans la BDD
-        Cursor c = bdd.query(TABLE_SCORE, new String[] {ID_SCORE, ID_UTILISATEUR, ID_QUESTION,SCORE_SCORE,NBERR_SCORE},
+        Cursor c = bdd.query(TABLE_SCORE, new String[] {ID_SCORE,SCORE_SCORE,DATE_SCORE},
                 SCORE_SCORE + " LIKE \"" + score +"\"", null, null, null, null);
         return cursorToScore(c);
     }
 
     public Score getScoreWithID(int id){
         //On récupère dans un Cursor les valeurs correspondant à un livre contenu dans la BDD
-        Cursor c = bdd.query(TABLE_SCORE, new String[] {ID_SCORE, ID_UTILISATEUR, ID_QUESTION,SCORE_SCORE,NBERR_SCORE},
+        Cursor c = bdd.query(TABLE_SCORE, new String[] {ID_SCORE,SCORE_SCORE,DATE_SCORE},
                 ID_SCORE + " LIKE \"" + id +"\"", null, null, null, null);
         return cursorToScore(c);
     }
@@ -107,10 +100,8 @@ public class ScoreBDD {
         Score score = new Score();
         //on lui affecte toutes les infos grâce aux infos contenues dans le Cursor
         score.setIdScore(c.getInt(NUM_IDSCORE));
-        score.setIdUser(c.getInt(NUM_IDUSER));
-        score.setIdQuest(c.getInt(NUM_IDQUEST));
-        score.setScore(c.getInt(NUM_IDQUEST));
-        score.setNbErr(c.getInt(NUM_IDQUEST));
+        score.setScore(c.getInt(NUM_SCORE));
+        score.setDate(c.getString(NUM_DATE));
         //On ferme le cursor
         c.close();
         //On retourne le livre

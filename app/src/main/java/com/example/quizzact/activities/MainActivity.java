@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
         Intent music = new Intent();
         music.setClass(this, MusicService.class);
         Intent intent = getIntent();
-        System.out.println(intent);
 
+        //IMPORTANT -> Musique se lance dés le début
         if(intent.getAction()=="android.intent.action.MAIN"){
             startService(music);
         }else if(intent.getStringExtra("buttonMusic")=="ON"){
@@ -85,10 +85,17 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                System.out.println(test);
+
                 if(test.equals("ON"))
                 sounds.start();
+
                 Intent intent = new Intent(MainActivity.this, QuizzActivity.class);
+                if(getIntent().getStringExtra("buttonSounds")!=null){
+                    intent.putExtra("buttonSounds",getIntent().getStringExtra("buttonSounds"));
+                }
+                if(getIntent().getStringExtra("buttonMusic")!=null){
+                    intent.putExtra("buttonMusic",getIntent().getStringExtra("buttonMusic"));
+                }
                 startActivity(intent);
             }
         });
@@ -126,7 +133,14 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(test);
                 if(test.equals("ON"))
                 sounds.start();
+
                 Intent intent = new Intent(MainActivity.this, ScoreActivity.class);
+                if(getIntent().getStringExtra("buttonSounds")!=null){
+                    intent.putExtra("buttonSounds",getIntent().getStringExtra("buttonSounds"));
+                }
+                if(getIntent().getStringExtra("buttonMusic")!=null){
+                    intent.putExtra("buttonMusic",getIntent().getStringExtra("buttonMusic"));
+                }
                 startActivity(intent);
             }
         });
@@ -174,9 +188,14 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         if (mServ != null) {
-            if(intent.getStringExtra("buttonSon")=="ON")
-            mServ.resumeMusic();
+            if(intent.getStringExtra("buttonMusic")!=null){
+                if(intent.getStringExtra("buttonMusic").equals("ON"))
+                    mServ.resumeMusic();
+            }else{
+                mServ.resumeMusic();
+            }
         }
+
     }
 
     @Override

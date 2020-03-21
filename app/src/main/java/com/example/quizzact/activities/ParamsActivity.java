@@ -54,23 +54,6 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
 
 
 
-        //Start HomeWatcher
-        homeWatcher = new HomeWatcher(this);
-        homeWatcher.setOnHomePressedListener(new HomeWatcher.OnHomePressedListener() {
-            @Override
-            public void onHomePressed() {
-                if (mServ != null) {
-                    mServ.pauseMusic();
-                }
-            }
-            @Override
-            public void onHomeLongPressed() {
-                if (mServ != null) {
-                    mServ.pauseMusic();
-                }
-            }
-        });
-        homeWatcher.startWatch();
 
 
         Intent intent=getIntent();

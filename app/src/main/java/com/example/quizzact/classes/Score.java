@@ -2,19 +2,15 @@ package com.example.quizzact.classes;
 
 public class Score {
     private int idScore;
-    private int idUser;
-    private int idQuest;
     private int score;
-    private int nbErr;
+    private String date;
 
     public Score() {
     }
 
-    public Score(int idUser, int idQuest, int score, int nbErr) {
-        this.idUser = idUser;
-        this.idQuest = idQuest;
+    public Score(int score,String date) {
         this.score = score;
-        this.nbErr = nbErr;
+        this.date=date;
     }
 
     public int getIdScore() {
@@ -25,22 +21,6 @@ public class Score {
         this.idScore = idScore;
     }
 
-    public int getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-    }
-
-    public int getIdQuest() {
-        return idQuest;
-    }
-
-    public void setIdQuest(int idQuest) {
-        this.idQuest = idQuest;
-    }
-
     public int getScore() {
         return score;
     }
@@ -49,22 +29,21 @@ public class Score {
         this.score = score;
     }
 
-    public int getNbErr() {
-        return nbErr;
+    public String getDate() {
+        return date;
     }
 
-    public void setNbErr(int nbErr) {
-        this.nbErr = nbErr;
+    public void setDate(String date) {
+        this.date = date;
     }
+
 
     @Override
     public String toString() {
         return "Score{" +
                 "idScore=" + idScore +
-                ", idUser=" + idUser +
-                ", idQuest=" + idQuest +
                 ", score=" + score +
-                ", nbErr=" + nbErr +
+                ", date=" + date +
                 '}';
     }
 }
