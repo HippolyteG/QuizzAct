@@ -97,7 +97,7 @@ public class ScoreActivity extends AppCompatActivity {
                 row = new TableRow(this);
                 if(scoreBDD.getScoreWithID(scoreBDD.countLignes()-i+1)!=null){
                     tv1.setText(String.valueOf(scoreBDD.getScoreWithID(scoreBDD.countLignes()-i+1).getDate()));
-                    tv2.setText(String.valueOf(scoreBDD.getScoreWithID(scoreBDD.countLignes()-i+1).getScore()));
+                    tv2.setText(String.valueOf(scoreBDD.getScoreWithID(scoreBDD.countLignes()-i+1).getScore()) + "/5");
                 }
 
                 tv1.setGravity(Gravity.RIGHT); // centrage dans la cellule
