@@ -87,6 +87,8 @@ public class BaseDeDonnees extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_REPONSE);
         db.execSQL(CREATE_TABLE_BONNE_REPONSE);
         db.execSQL(CREATE_TABLE_SCORE);
+
+
     }
 
     @Override
