@@ -32,11 +32,16 @@ public class ResultActivity extends AppCompatActivity /*implements Parcelable */
             {
                 Intent intent = new Intent(ResultActivity.this,MainActivity.class);
                 finish();
+                if(getIntent().getStringExtra("buttonMusic")!=null){
+                    intent.putExtra("buttonMusic",getIntent().getStringExtra("buttonMusic"));
+                }
+                if(getIntent().getStringExtra("buttonSounds")!=null){
+                    intent.putExtra("buttonSounds",getIntent().getStringExtra("buttonSounds"));
+                }
                 startActivity(intent);
             }
         }, 1500L);
     }
-
 
 
 }

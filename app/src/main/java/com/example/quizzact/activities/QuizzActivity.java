@@ -98,6 +98,7 @@ public class QuizzActivity extends Activity {
 
 
 
+
         Intent intent = getIntent();
         numQuestion=intent.getIntExtra("numQuestion",1);
 
@@ -139,7 +140,7 @@ public class QuizzActivity extends Activity {
 
                 rep = reponseBDD.getReponsesLieAQuestion(questionBDD.getQuestionAvecID(nombreAleatoire).getId());
 
-                //Collections.shuffle(Arrays.asList(rep));
+                Collections.shuffle(Arrays.asList(rep));
                 reponse1.setText(rep[0].getLibRep());
                 reponse2.setText(rep[1].getLibRep());
                 reponse3.setText(rep[2].getLibRep());
@@ -158,7 +159,11 @@ public class QuizzActivity extends Activity {
 
 
             Intent intentResult = new Intent(QuizzActivity.this,ResultActivity.class);
+            intentResult.putExtra("buttonSounds",soundsOn);
             intentResult.putExtra("score",score);
+            if(getIntent().getStringExtra("buttonMusic")!=null){
+                intentResult.putExtra("buttonMusic",getIntent().getStringExtra("buttonMusic"));
+            }
             finish();
             startActivity(intentResult);
         }
@@ -175,8 +180,10 @@ public class QuizzActivity extends Activity {
 
                 @Override
                 public void onClick(View v) {
-                    if(soundsOn.equals("ON"))
-                    sound.start();
+                    if(soundsOn.equals("ON")){
+                        sound.start();
+                    }
+
 
 
                     numQuestion+=1;
@@ -223,9 +230,11 @@ public class QuizzActivity extends Activity {
                             if(getIntent().getStringExtra("buttonMusic")!=null){
                                 intent.putExtra("buttonMusic",getIntent().getStringExtra("buttonMusic"));
                             }
-                            finish();
-                            overridePendingTransition(0, 0);
+
+
                             startActivity(intent);
+                            overridePendingTransition(0, 0);
+                            finish();
                         }
                     }, 1500L);
 
@@ -236,8 +245,9 @@ public class QuizzActivity extends Activity {
                 public void onClick(View v) {
                     numQuestion+=1;
 
-                    if(soundsOn.equals("ON"))
-                    sound.start();
+                    if(soundsOn.equals("ON")){
+                        sound.start();
+                    }
 
 
                     Bonne_ReponseBDD bonne_reponseBDD = new Bonne_ReponseBDD(QuizzActivity.this);
@@ -282,9 +292,11 @@ public class QuizzActivity extends Activity {
                             if(getIntent().getStringExtra("buttonMusic")!=null){
                                 intent.putExtra("buttonMusic",getIntent().getStringExtra("buttonMusic"));
                             }
-                            finish();
-                            overridePendingTransition(0, 0);
+
+
                             startActivity(intent);
+                            overridePendingTransition(0, 0);
+                            finish();
                         }
                     }, 1500L);
                 }
@@ -295,8 +307,10 @@ public class QuizzActivity extends Activity {
                 public void onClick(View v) {
                     numQuestion+=1;
 
-                    if(soundsOn.equals("ON"))
-                    sound.start();
+                    if(soundsOn.equals("ON")){
+                        sound.start();
+                    }
+
 
 
                     Bonne_ReponseBDD bonne_reponseBDD = new Bonne_ReponseBDD(QuizzActivity.this);
@@ -341,9 +355,11 @@ public class QuizzActivity extends Activity {
                                 intent.putExtra("buttonMusic",getIntent().getStringExtra("buttonMusic"));
                             }
 
-                            finish();
-                            overridePendingTransition(0, 0);
+
+
                             startActivity(intent);
+                            overridePendingTransition(0, 0);
+                            finish();
                         }
                     }, 1500L);
 
@@ -355,8 +371,10 @@ public class QuizzActivity extends Activity {
                 public void onClick(View v) {
                     numQuestion+=1;
 
-                    if(soundsOn.equals("ON"))
+                    if(soundsOn.equals("ON")){
                         sound.start();
+                    }
+
 
 
                     Bonne_ReponseBDD bonne_reponseBDD = new Bonne_ReponseBDD(QuizzActivity.this);
@@ -400,9 +418,11 @@ public class QuizzActivity extends Activity {
                             if(getIntent().getStringExtra("buttonMusic")!=null){
                                 intent.putExtra("buttonMusic",getIntent().getStringExtra("buttonMusic"));
                             }
-                            finish();
-                            overridePendingTransition(0, 0);
+
+
                             startActivity(intent);
+                            overridePendingTransition(0, 0);
+                            finish();
                         }
                     }, 1500L);
                 }
@@ -423,11 +443,20 @@ public class QuizzActivity extends Activity {
                 mServ.resumeMusic();
             }
         }
+        if(intent.getStringExtra("buttonSounds")!=null){
+            soundsOn=intent.getStringExtra("buttonSounds");
+        }
     }
 
     @Override
     public void onBackPressed(){
         Intent intent = new Intent(QuizzActivity.this,MainActivity.class);
+        if(getIntent().getStringExtra("buttonMusic")!=null){
+            intent.putExtra("buttonMusic",getIntent().getStringExtra("buttonMusic"));
+        }
+        if(getIntent().getStringExtra("buttonSounds")!=null){
+            intent.putExtra("buttonSounds",getIntent().getStringExtra("buttonSounds"));
+        }
         finish();
         startActivity(intent);
         backPressed=true;

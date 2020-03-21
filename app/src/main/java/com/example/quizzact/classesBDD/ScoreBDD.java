@@ -62,9 +62,9 @@ public class ScoreBDD {
         values.put(DATE_SCORE, score.getDate());
         return bdd.update(TABLE_SCORE, values, ID_SCORE + " = " +id, null);
     }
-    public int removeScoreWithID(int id){
+    public int removeScore(){
         //Suppression d'un livre de la BDD grâce à l'ID
-        return bdd.delete(TABLE_SCORE, ID_SCORE + " = " +id, null);
+        return bdd.delete(TABLE_SCORE, null, null);
     }
 
 

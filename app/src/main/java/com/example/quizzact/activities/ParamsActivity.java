@@ -101,6 +101,10 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
         this.buttonMusic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(buttonSounds.getText().toString().equals("ON")){
+                    mediaplayer.start();
+                }
+
                 if(String.valueOf(buttonMusic.getText()).equals("ON")){
                     buttonMusic.setText("OFF");
                     mServ.pauseMusic();
@@ -116,7 +120,7 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
 
            @Override
            public void onClick(View v) {
-               if(String.valueOf(buttonSounds.getText()).equals("ON")){
+               if(buttonSounds.getText().toString().equals("ON")){
                    buttonSounds.setText("OFF");
                }else {
                    mediaplayer.start();
@@ -130,9 +134,10 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
 
             @Override
             public void onClick(View v) {
-                for(int i=1;i<=scoreBDD.countLignes()+1;i++){
-                    scoreBDD.removeScoreWithID(i);
+                if(buttonSounds.getText().toString().equals("ON")){
+                    mediaplayer.start();
                 }
+                scoreBDD.removeScore();
                 buttonCache.setVisibility(View.INVISIBLE);
             }
 
@@ -147,8 +152,9 @@ public class ParamsActivity extends AppCompatActivity /*implements Parcelable */
     @Override
     public void onBackPressed(){
         Intent intent = new Intent(ParamsActivity.this, MainActivity.class);
-        intent.putExtra("buttonMusic", buttonMusic.getText());
-        intent.putExtra("buttonSounds",buttonSounds.getText());
+        intent.putExtra("buttonMusic", buttonMusic.getText().toString());
+        intent.putExtra("buttonSounds",buttonSounds.getText().toString());
+        finish();
         startActivity(intent);
         super.onBackPressed();
 

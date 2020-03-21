@@ -135,6 +135,17 @@ public class ScoreActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(ScoreActivity.this,MainActivity.class);
+        if(getIntent().getStringExtra("buttonMusic")!=null)
+            intent.putExtra("buttonMusic",getIntent().getStringExtra("buttonMusic"));
+        if(getIntent().getStringExtra("buttonSounds")!=null)
+            intent.putExtra("buttonSounds",getIntent().getStringExtra("buttonSounds"));
+        startActivity(intent);
+        super.onBackPressed();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
 
